@@ -1,0 +1,28 @@
+{
+  "name": "supabase-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "check-types": "turbo check-types",
+    "biome-check": "biome check --write .",
+    "biome-check-unsafe": "biome check --write --unsafe .",
+    "biome-check-error": "pnpm biome check --error-on-warnings --diagnostic-level=error .",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "husky": "^9.1.7",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=20"
+  }
+}

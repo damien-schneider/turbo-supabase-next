@@ -1,0 +1,4 @@
+pnpm lint
+pnpm biome-check
+pnpm check-types
+# pnpm test
