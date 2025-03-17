@@ -8,6 +8,8 @@ const PUBLIC_ROUTES = [
   "/auth/callback",
   "/shared/podcast",
   "/auth/forgot-password",
+  "/privacy-policy",
+  "/terms-of-use",
 ];
 
 export async function updateSession(

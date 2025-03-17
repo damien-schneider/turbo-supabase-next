@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 import { fileURLToPath } from "node:url";
+import createMDX from "@next/mdx";
 import { createJiti } from "jiti";
 
 const jiti = createJiti(fileURLToPath(import.meta.url));
@@ -13,6 +14,8 @@ const nextConfig = {
   experimental: {
     reactCompiler: true,
   },
+  // Configure `pageExtensions` to include markdown and MDX files
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   transpilePackages: [
     "@workspace/ui",
     // "@t3-oss/env-nextjs", // If output is: "standalone" later, uncomment
@@ -30,5 +33,8 @@ const nextConfig = {
     ],
   },
 };
+const withMDX = createMDX({
+  // Add markdown plugins here, as desired
+});
 
-export default nextConfig;
+export default withMDX(nextConfig);

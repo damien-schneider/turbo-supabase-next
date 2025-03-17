@@ -12,7 +12,7 @@
   --font-satoshi: var(--font-satoshi);
   /* --font-sans: var(--font-geist-sans); */
   --font-mono: var(--font-geist-mono);
-  --color-brand: #ab64fe;
+  --color-brand: var(--color-primary);
   --animate-accordion-down: accordion-down;
   --animate-accordion-up: accordion-up;
 }

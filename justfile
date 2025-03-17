@@ -11,7 +11,17 @@ update-types:
 
 [group('update')]
 package-update-recursive PACKAGE_NAME:
-  pnpm up  -D --recursive {{PACKAGE_NAME}}
+  pnpm up -D --recursive {{PACKAGE_NAME}}
+
+# Upgrade all the packages in all the monorepo
+[group('upgrade')]
+upgrade-all:
+  pnpm up -L --latest --recursive
+
+# Update all the packages in all the monorepo
+[group('update')]
+update-all:
+  pnpm up -L --recursive
 
 [group('build')]
 build-graph:
@@ -21,6 +31,10 @@ build-graph:
 [group('build')]
 build:
   turbo build
+
+pre-commit:
+  chmod +x .husky/pre-commit
+  .husky/pre-commit
 
 # Login to supabase, then update types for supabase package & build it
 [group('supabase'), working-directory('packages/supabase')]
@@ -65,6 +79,7 @@ biome-write:
 biome-write-unsafe:
   pnpm biome check --write --unsafe
 
+# Build the supabase package
 [group('init'), working-directory('packages/supabase')]
 init-supabase:
   pnpm build
