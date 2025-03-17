@@ -16,6 +16,7 @@ package-update-recursive PACKAGE_NAME:
 # Upgrade all the packages in all the monorepo
 [group('upgrade')]
 upgrade-all:
+  pnpm turbo clean
   pnpm up -L --latest --recursive
 
 # Update all the packages in all the monorepo

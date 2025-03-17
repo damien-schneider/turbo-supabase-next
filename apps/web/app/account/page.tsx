@@ -42,10 +42,6 @@ interface ProfileData {
   full_name: string | null;
 }
 
-interface UserUpdateData {
-  full_name: string;
-}
-
 export default function AccountPage() {
   const router = useRouter();
   const supabase = createClient();
@@ -95,7 +91,8 @@ export default function AccountPage() {
     // Using type assertion to fix TypeScript error with incomplete Database type
     const { error } = await supabase
       .from("users")
-      //@ts-expect-error
+      //TODO: Replace with the correct type when available
+      //@ts-expect-error <Retrieving supabase type is necessary for the boilerplate>
       .update({ full_name: data.fullName })
       .eq("id", user.id);
 
