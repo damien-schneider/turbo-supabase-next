@@ -1,3 +1,4 @@
+just supabase-build
 pnpm lint
 pnpm biome-check
 pnpm check-types

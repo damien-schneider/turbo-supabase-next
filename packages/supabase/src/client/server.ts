@@ -1,11 +1,11 @@
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient as creacteClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import type { Database } from "types/database.types";
 
-export async function createClient() {
+export async function createServerClient() {
   const cookieStore = await cookies();
 
-  return createServerClient<Database>(
+  return creacteClient<Database>(
     // biome-ignore lint/style/noNonNullAssertion: <To simplify monorepo setup>
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     // biome-ignore lint/style/noNonNullAssertion: <To simplify monorepo setup>

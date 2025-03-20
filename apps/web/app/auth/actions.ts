@@ -1,12 +1,12 @@
 "use server";
 import { envClient } from "@/env/client";
-import { createClient } from "@workspace/supabase/server";
+import { createServerClient } from "@workspace/supabase/server";
 import type { Provider } from "@workspace/supabase/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const signInWithPassword = async (formData: FormData) => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -24,7 +24,7 @@ const signInWithPassword = async (formData: FormData) => {
 const signInWithOAuth = async (provider: Provider) => {
   const baseUrl = envClient.NEXT_PUBLIC_BASE_URL;
   const redirectTo = `${baseUrl}/auth/callback`;
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
     options: {
@@ -56,7 +56,7 @@ const signInWithOAuth = async (provider: Provider) => {
 };
 
 const signOut = async () => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { error } = await supabase.auth.signOut();
 
   if (error) {
@@ -67,7 +67,7 @@ const signOut = async () => {
 };
 
 const signUpWithPassword = async (formData: FormData) => {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,

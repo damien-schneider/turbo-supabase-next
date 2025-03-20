@@ -4,10 +4,8 @@ import type { Database } from "types/database.types";
 
 // Array of route prefixes that don't require authentication
 const PUBLIC_ROUTES = [
-  "/auth/sign",
-  "/auth/callback",
+  "/auth",
   "/shared/podcast",
-  "/auth/forgot-password",
   "/privacy-policy",
   "/terms-of-use",
 ];

@@ -3,9 +3,35 @@ default:
   @just --list --list-heading $'\n-------------------------------------------\n\n---   Here are the available commands   ---\n\n-------------------------------------------\n\n'
 
 # Remove .next & node_modules & pnpm-lock.yaml & .turbo
-clean:
-  turbo clean && ./scripts/cleanup-repo.sh
+[group('clean')]
+clean-all:
+  @turbo clean-next
+  @turbo clean-node-modules
+  @turbo clean-lock
+  @turbo clean-turbo
 
+# Remove .next
+[group('clean')]
+clean-next:
+  rm -rf .next
+
+# Remove node_modules
+[group('clean')]
+clean-node-modules:
+  rm -rf node_modules
+
+# Remove pnpm-lock.yaml
+[group('clean')]
+clean-lock:
+  rm -rf pnpm-lock.yaml
+
+# Remove .turbo
+[group('clean')]
+clean-turbo:
+  rm -rf .turbo
+
+# Update supabase types
+[group('maintenance')]
 update-types:
   turbo run update-types
 
@@ -33,9 +59,13 @@ build-graph:
 build:
   turbo build
 
+# Run pre-commit hooks
+[group('maintenance')]
 pre-commit:
-  chmod +x .husky/pre-commit
-  .husky/pre-commit
+  @just supabase-build
+  pnpm lint
+  pnpm biome-check
+  pnpm check-types
 
 # Login to supabase, then update types for supabase package & build it
 [group('supabase'), working-directory('packages/supabase')]
@@ -81,8 +111,8 @@ biome-write-unsafe:
   pnpm biome check --write --unsafe
 
 # Build the supabase package
-[group('init'), working-directory('packages/supabase')]
-init-supabase:
+[group('supabase'), working-directory('packages/supabase')]
+supabase-build:
   pnpm build
 
 # Reset the shadcn ui package

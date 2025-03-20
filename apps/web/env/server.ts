@@ -1,7 +1,8 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-
+import { z } from "zod";
 export const envServer = createEnv({
   server: {
+    NEXT_PRIVATE_SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
     // DATABASE_URL: z.string().url(),
     // OPENAI_API_KEY: z.string().min(1),
   },

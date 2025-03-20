@@ -1,7 +1,7 @@
 // The client you created from the Server-Side Auth instructions
 import { envClient } from "@/env/client";
 import type { Session } from "@supabase/supabase-js";
-import { createClient } from "@workspace/supabase/server";
+import { createServerClient } from "@workspace/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/auth/auth-code-error`);
   }
 
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { error, data } = await supabase.auth.exchangeCodeForSession(code);
   console.log("\n\nData exchangeCodeForSession:\n\n", data);
 
@@ -67,7 +67,7 @@ async function storeProviderToken({
   provider,
   providerToken,
 }: { idUser: string; provider: "google" | "notion"; providerToken: string }) {
-  const _supabase = await createClient();
+  const _supabase = await createServerClient();
 
   const getProviderTokenColumns = (provider: "google" | "notion") => {
     switch (provider) {
