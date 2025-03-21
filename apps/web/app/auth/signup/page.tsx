@@ -30,8 +30,8 @@ export default function SignUpPage() {
 
       <div className="flex flex-col gap-6">
         <div className="grid gap-4 w-full">
-          <OAuthButton provider="notion">Sign Up with</OAuthButton>
-          {/* <OAuthButton provider="google">Sign Up with</OAuthButton> */}
+          {/* <OAuthButton provider="notion">Sign Up with</OAuthButton> */}
+          <OAuthButton provider="google">Sign Up with</OAuthButton>
         </div>
 
         <OrSeparator />

@@ -43,7 +43,7 @@ export default function RootLayout({
 
       <body
         className={cn(
-          "bg-background ",
+          "bg-background",
           // fontSans.variable,
           // fontMono.variable,
           fontSatoshi.variable,

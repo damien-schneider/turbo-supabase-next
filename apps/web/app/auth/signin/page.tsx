@@ -25,8 +25,8 @@ export default function SignInPage() {
       <H1 className="text-center my-8">Login to your Account</H1>
       <div className="flex flex-col gap-6">
         <div className="grid gap-4 w-full">
-          <OAuthButton provider="notion" />
-          {/* <OAuthButton provider="google" /> */}
+          {/* <OAuthButton provider="notion" /> */}
+          <OAuthButton provider="google" />
         </div>
         <OrSeparator />
         <form action={(formData) => handleSubmit(formData)}>
