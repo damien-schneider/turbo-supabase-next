@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "pnpm start",
+    "start": "source .env && (pnpm supabase status || pnpm supabase start) && open http://localhost:54323",
+    "stop": "source .env && pnpm supabase stop"
+  },
+  "devDependencies": {
+    "@snaplet/copycat": "^6.0.0",
+    "@snaplet/seed": "0.98.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/pg": "^8.11.11",
+    "bcrypt": "^5.1.1",
+    "pg": "^8.14.1",
+    "supabase": "^2.20.5",
+    "uuid": "^11.1.0"
+  }
+}
