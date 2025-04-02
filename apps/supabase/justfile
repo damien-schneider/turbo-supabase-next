@@ -1,0 +1,114 @@
+# By default, Just uses sh.  We override it with bash for convenience.
+set shell := ["bash", "-cu"]
+
+# Show a list of recipes by default
+default:
+  @just --list --list-heading $'\n-------------------------------------------\n\n---   Available just Commands   ---\n\n-------------------------------------------\n\n'
+
+
+# -------------------------------------------------------------------
+# Supabase Deployment
+# -------------------------------------------------------------------
+
+# Deploys your local database migrations to the specified (production) Supabase project.
+[group("Supabase Deployment"), confirm('This will be deployed to production, are you sure to continue ?')]
+carefull-supabase-deploy:
+  source .env && pnpm supabase link --project-ref whqaysgatfhrzrhnvibl
+  source .env && pnpm supabase db push
+
+# Links your local environment to the specified Supabase project
+[group("Supabase Deployment")]
+supabase-link:
+  pnpm supabase link --project-ref whqaysgatfhrzrhnvibl
+
+# Authenticates your local Supabase CLI with your Supabase account
+[group("Supabase Deployment")]
+supabase-login:
+  pnpm supabase login
+
+# Applies any un-applied migrations from the migrations folder to your local environment
+[group("Supabase Deployment")]
+migration-up:
+  pnpm supabase migration up
+
+
+# -------------------------------------------------------------------
+# Database & Supabase Management
+# -------------------------------------------------------------------
+
+# Generates a new SQL migration file based on the differences between your current local database and the existing schema/migrations. The file name is provided via the FILENAME parameter.
+[group("Database & Supabase Management")]
+db-diff FILENAME:
+  source .env && pnpm supabase db diff --local --file={{FILENAME}}
+
+# Generates a SQL diff of your local database changes and writes it to "diff.sql". It helps you see what changes would be applied to your database if you were to run a migration.
+[group("Database & Supabase Management")]
+supabase-db-diff:
+  pnpm supabase db diff > diff.sql
+
+# Undoes the last applied migration by rolling back changes to your local database
+[group("Database & Supabase Management")]
+supabase-db-undo:
+  pnpm supabase db rollback
+
+# Lints your local database schema, checking for potential issues or best practices
+[group("Database & Supabase Management")]
+db-lint:
+  pnpm supabase db lint
+
+# Resets your local database and applies all local migrations (and seeds if configured).
+# If the reset fails, it attempts to start Supabase.
+[group("Database & Supabase Management")]
+db-reset:
+  source .env && (pnpm supabase db reset || pnpm supabase start)
+
+# Runs any database-specific tests, for instance testing migrations or other DB validations
+[group("Database & Supabase Management")]
+db-test:
+  pnpm supabase db test
+
+# Pulls the specified schema(s) from Supabase to your local environment (creates new migration files if needed)
+[group("Database & Supabase Management")]
+pull:
+  pnpm supabase db pull --schema auth,storage
+
+# Starts the local Supabase instance if it is not already running
+[group("Database & Supabase Management")]
+start:
+  source .env && (pnpm supabase status || pnpm supabase start) && open http://localhost:54323
+
+# Stops the local Supabase instance
+[group("Database & Supabase Management")]
+stop:
+  source .env && pnpm supabase stop
+
+
+# -------------------------------------------------------------------
+# Seeding & Snaplet
+# -------------------------------------------------------------------
+
+# Generates a new seed file ("auto_generated_seed.sql") from your seed.ts
+# using either Deno or Node, then you can apply it to populate your local DB with test data
+[group("Seeding & Snaplet")]
+seed:
+  pnpm seed:run-deno || pnpm seed:run-node
+
+# Uses Deno to generate the seed file from seed.ts
+[group("Seeding & Snaplet")]
+seed-run-deno:
+  deno --allow-env --allow-read --allow-ffi --allow-write --allow-sys --allow-net seed.ts > seeds/auto_generated_seed.sql
+
+# Uses Node (via tsx) to generate the seed file from seed.ts
+[group("Seeding & Snaplet")]
+seed-run-node:
+  pnpx tsx seed.ts > seeds/auto_generated_seed.sql
+
+# Initializes Snaplet, which helps manage seeding and snapshotting for your Supabase DB
+[group("Seeding & Snaplet")]
+snaplet-init:
+  pnpx @snaplet/seed init
+
+# Syncs Snaplet so that your seeds and snapshots match your local database
+[group("Seeding & Snaplet")]
+snaplet-sync:
+  pnpx @snaplet/seed sync

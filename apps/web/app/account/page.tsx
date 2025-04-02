@@ -88,11 +88,9 @@ export default function AccountPage() {
     }
 
     setIsUpdating(true);
-    // Using type assertion to fix TypeScript error with incomplete Database type
+
     const { error } = await supabase
       .from("users")
-      //TODO: Replace with the correct type when available
-      //@ts-expect-error <Retrieving supabase type is necessary for the boilerplate>
       .update({ full_name: data.fullName })
       .eq("id", user.id);
 

@@ -6,7 +6,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "check-types": "tsc --noEmit",
-    "update-types": "supabase gen types typescript --project-id TO_REPLACE > src/types/database.types.ts"
+    "update-types": "supabase gen types --lang typescript --local > src/types/database.types.ts"
   },
   "peerDependencies": {
     "next": "^15.1.6",
@@ -17,7 +17,7 @@
     "@supabase/supabase-js": "^2.49.1"
   },
   "devDependencies": {
-    "supabase": "^2.19.7",
+    "supabase": "^2.20.5",
     "typescript": "^5.8.2"
   },
   "exports": {
