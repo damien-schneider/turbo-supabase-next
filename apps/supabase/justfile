@@ -12,18 +12,18 @@ default:
 
 # Deploys your local database migrations to the specified (production) Supabase project.
 [group("Supabase Deployment"), confirm('This will be deployed to production, are you sure to continue ?')]
-carefull-supabase-deploy:
-  source .env && pnpm supabase link --project-ref whqaysgatfhrzrhnvibl
+carefull-deploy PROJECT_ID:
+  source .env && pnpm supabase link --project-ref {{PROJECT_ID}}
   source .env && pnpm supabase db push
 
 # Links your local environment to the specified Supabase project
 [group("Supabase Deployment")]
-supabase-link:
-  pnpm supabase link --project-ref whqaysgatfhrzrhnvibl
+link PROJECT_ID:
+  pnpm supabase link --project-ref {{PROJECT_ID}}
 
 # Authenticates your local Supabase CLI with your Supabase account
 [group("Supabase Deployment")]
-supabase-login:
+login:
   pnpm supabase login
 
 # Applies any un-applied migrations from the migrations folder to your local environment
@@ -38,17 +38,17 @@ migration-up:
 
 # Generates a new SQL migration file based on the differences between your current local database and the existing schema/migrations. The file name is provided via the FILENAME parameter.
 [group("Database & Supabase Management")]
-db-diff FILENAME:
+db-diff-local FILENAME:
   source .env && pnpm supabase db diff --local --file={{FILENAME}}
 
-# Generates a SQL diff of your local database changes and writes it to "diff.sql". It helps you see what changes would be applied to your database if you were to run a migration.
+# Generates a SQL diff of your local database changes and writes it to "diff.sql". It helps you see what changes would be applied to your database if you were to run a migration. Act the same as "db pull"
 [group("Database & Supabase Management")]
-supabase-db-diff:
-  pnpm supabase db diff > diff.sql
+db-diff-linked FILENAME:
+  pnpm supabase db diff -f {{FILENAME}} --linked --schema public,auth,storage
 
 # Undoes the last applied migration by rolling back changes to your local database
 [group("Database & Supabase Management")]
-supabase-db-undo:
+db-rollback:
   pnpm supabase db rollback
 
 # Lints your local database schema, checking for potential issues or best practices
@@ -69,8 +69,8 @@ db-test:
 
 # Pulls the specified schema(s) from Supabase to your local environment (creates new migration files if needed)
 [group("Database & Supabase Management")]
-pull:
-  pnpm supabase db pull --schema auth,storage
+db-pull-linked:
+  pnpm supabase db pull --linked --schema public,auth
 
 # Starts the local Supabase instance if it is not already running
 [group("Database & Supabase Management")]
@@ -92,6 +92,11 @@ stop:
 [group("Seeding & Snaplet")]
 seed:
   pnpm seed:run-deno || pnpm seed:run-node
+
+# Create a sql seed file from the local database
+[group("Seeding & Snaplet")]
+db-dump FILENAME:
+  source .env && pnpm supabase db dump -f supabase/seeds/{{FILENAME}}.sql --data-only --local --schema public,auth,storage
 
 # Uses Deno to generate the seed file from seed.ts
 [group("Seeding & Snaplet")]
