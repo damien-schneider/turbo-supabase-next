@@ -7,6 +7,8 @@
     "dev": "turbo dev",
     "start": "turbo start",
     "lint": "turbo lint",
+    "test": "turbo test",
+    "test:watch": "turbo test:watch",
     "check-types": "turbo check-types",
     "biome-check": "biome check --write .",
     "biome-check-unsafe": "biome check --write --unsafe .",
