@@ -20,8 +20,8 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "husky": "^9.1.7",
-    "turbo": "^2.4.4",
-    "typescript": "5.8.2"
+    "turbo": "^2.5.2",
+    "typescript": "5.8.3"
   },
   "packageManager": "pnpm@9.12.3",
   "engines": {
