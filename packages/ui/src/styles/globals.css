@@ -18,9 +18,20 @@
 }
 
 ::selection {
-  background-color: --alpha(var(--color-brand) / 80%);
-  color: --alpha(var(--color-white) / 90%);
+  background-color: --alpha(var(--color-foreground) / 70%);
+  color: --alpha(var(--color-background) / 90%);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--color-brand);
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 50px 50px --alpha(var(--color-brand) / 30%);
+}
+
 
 @layer base {
   :root {

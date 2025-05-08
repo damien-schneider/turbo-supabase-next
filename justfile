@@ -5,10 +5,10 @@ default:
 # Remove .next & node_modules & pnpm-lock.yaml & .turbo
 [group('clean')]
 clean-all:
-  @turbo clean-next
-  @turbo clean-node-modules
-  @turbo clean-lock
-  @turbo clean-turbo
+  @just clean-next
+  @just clean-node-modules
+  @just clean-lock
+  @just clean-turbo
 
 # Remove .next
 [group('clean')]
