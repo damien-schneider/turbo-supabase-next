@@ -2,12 +2,10 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TRPCProvider } from "@/trpc/client";
 import type { ReactNode } from "react";
 
 export function Providers({ children }: { children: ReactNode }) {
-  const queryClient = new QueryClient();
-
   return (
     <NextThemesProvider
       attribute="class"
@@ -16,7 +14,7 @@ export function Providers({ children }: { children: ReactNode }) {
       disableTransitionOnChange={true}
       enableColorScheme={true}
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <TRPCProvider>{children}</TRPCProvider>
     </NextThemesProvider>
   );
 }

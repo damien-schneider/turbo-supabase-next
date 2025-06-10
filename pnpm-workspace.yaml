@@ -1,3 +1,14 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@prisma/engines'
+  - '@snaplet/seed'
+  - '@tailwindcss/oxide'
+  - bcrypt
+  - core-js-pure
+  - esbuild
+  - sharp
+  - supabase

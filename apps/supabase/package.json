@@ -8,10 +8,10 @@
     "@snaplet/copycat": "^6.0.0",
     "@snaplet/seed": "0.98.0",
     "@types/bcrypt": "^5.0.2",
-    "@types/pg": "^8.11.14",
-    "bcrypt": "^5.1.1",
-    "pg": "^8.15.6",
-    "supabase": "^2.22.6",
+    "@types/pg": "^8.15.4",
+    "bcrypt": "^6.0.0",
+    "pg": "^8.16.0",
+    "supabase": "^2.24.3",
     "uuid": "^11.1.0"
   }
 }

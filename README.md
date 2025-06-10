@@ -11,9 +11,11 @@ A modern full-stack monorepo boilerplate with NextJS, Supabase, TailwindCSS, and
 - 🧩 **shadcn/ui** - Re-usable components built with Radix UI and Tailwind CSS
 - 📦 **PNPM** - Fast, disk space efficient package manager
 - 🔍 **TypeScript** - Static type checking
+- 🔗 **tRPC** - End-to-end typesafe APIs
 - 📊 **TanStack Query** - Powerful asynchronous state management
 - 🌗 **Theme Switcher** - Dark and light mode support
 - 🛠️ **Biome** - Fast linter, formatter, and more
+- 📦 **Just** - Fast, simple, and reliable task runner
 
 ## Prerequisites
 
