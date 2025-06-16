@@ -1,11 +1,20 @@
 import { initTRPC } from "@trpc/server";
+import { createServerClient } from "@workspace/supabase/server";
 import { cache } from "react";
 
 export const createTRPCContext = cache(async () => {
   /**
    * @see: https://trpc.io/docs/server/context
    */
-  return { userId: "user_123" };
+  const supabase = await createServerClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+  if (error && error.message !== "Auth session missing!") {
+    throw new Error(`Authentication error: ${error.message}`);
+  }
+  return { user };
 });
 
 // Avoid exporting the entire t-object
